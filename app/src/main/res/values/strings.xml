@@ -13,4 +13,7 @@
     <string name="hapus">Hapus Buku</string>
     <string name="nama_buku">Nama Buku</string>
     <string name="isbn_buku">ISBN</string>
+    <string name="pesan_hapus">Hapus catatan ini?</string>
+    <string name="tombol_hapus">Hapus</string>
+    <string name="tombol_batal">Batal</string>
 </resources>

@@ -51,6 +51,7 @@ import androidx.navigation.compose.rememberNavController
 import com.hasnan0062.assesment2.R
 import com.hasnan0062.assesment2.database.BukuDb
 import com.hasnan0062.assesment2.ui.screen.DetailViewModel
+import com.hasnan0062.assesment2.ui.screen.DisplayAlertDialog
 import com.hasnan0062.assesment2.ui.theme.Assesment2Theme
 import com.hasnan0062.assesment2.util.ViewModelFactory
 
@@ -68,6 +69,7 @@ fun DetailScreen(navController: NavController, id: Long? = null) {
     var judul by remember { mutableStateOf("") }
     var isbn by remember { mutableStateOf("") }
     var kategori by remember { mutableStateOf("Fiksi") }
+    var showDialog by remember { mutableStateOf(false)}
 
     LaunchedEffect(Unit) {
         if (id == null) return@LaunchedEffect
@@ -120,15 +122,14 @@ fun DetailScreen(navController: NavController, id: Long? = null) {
                     }
                     if (id != null) {
                         DeleteAction {
-                            viewModel.delete(id)
-                            navController.popBackStack()
+                            showDialog = true
                         }
                     }
                 }
             )
         }
     ) { padding ->
-        FormCatatan(
+        FormBuku(
             judul = judul,
             onJudulChange = { judul = it },
             isbn = isbn,
@@ -137,6 +138,16 @@ fun DetailScreen(navController: NavController, id: Long? = null) {
             onKategoriChange = { kategori = it },
             modifier = Modifier.padding(padding)
         )
+
+        if (id != null && showDialog) {
+            DisplayAlertDialog(
+                onDismissRequest = { showDialog = false}) {
+                showDialog = false
+                viewModel.delete(id)
+                navController.popBackStack()
+            }
+
+        }
     }
 }
 
@@ -167,7 +178,7 @@ fun DeleteAction(delete: () -> Unit) {
 }
 
 @Composable
-fun FormCatatan(
+fun FormBuku(
     judul: String, onJudulChange: (String) -> Unit,
     isbn: String, onIsbnChange: (String) -> Unit,
     kategori: String, onKategoriChange: (String) -> Unit,

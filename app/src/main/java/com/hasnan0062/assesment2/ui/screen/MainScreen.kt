@@ -54,13 +54,18 @@ import com.hasnan0062.assesment2.model.Buku
 import com.hasnan0062.assesment2.navigation.Screen
 import com.hasnan0062.assesment2.screen.MainViewModel
 import com.hasnan0062.assesment2.ui.theme.Assesment2Theme
+import com.hasnan0062.assesment2.util.SettingsDataStore
 import com.hasnan0062.assesment2.util.ViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun MainScreen(navController: NavHostController) {
-var showList by remember { mutableStateOf(true) }
+    val dataStore = SettingsDataStore(LocalContext.current)
+    val showList by dataStore.layoutFlow.collectAsState(true)
 
     Scaffold(
         topBar = {
@@ -73,7 +78,10 @@ var showList by remember { mutableStateOf(true) }
                     titleContentColor = MaterialTheme.colorScheme.primary
                 ),
                 actions = {
-                    IconButton(onClick = { showList = !showList }) {
+                    IconButton(onClick = {CoroutineScope(Dispatchers.IO).launch {
+                        dataStore.saveLayout(!showList)
+                    }
+                    }){
                         Icon(
                             painter = painterResource(
                                 if(showList) R.drawable.baseline_grid_view_24
@@ -104,7 +112,6 @@ var showList by remember { mutableStateOf(true) }
             }
         }
     ) { padding ->
-//            ScreenContent(Modifier.padding(innerPadding))
         ScreenContent(showList, modifier = Modifier.padding(padding), navController)
 
     }

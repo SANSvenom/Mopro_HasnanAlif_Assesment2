@@ -22,10 +22,10 @@ interface BukuDao {
     suspend fun delete(buku: Buku)
 
     @Query("SELECT * FROM buku ORDER BY kategori DESC")
-    fun getMahasiswa(): Flow<List<Buku>>
+    fun getBuku(): Flow<List<Buku>>
 
     @Query("SELECT * FROM buku WHERE id = :id")
-    suspend fun getMahasiswaById(id: Long): Buku?
+    suspend fun getBukuById(id: Long): Buku?
 
     @Query("DELETE FROM buku WHERE id = :id")
     suspend fun deleteById(id: Long)

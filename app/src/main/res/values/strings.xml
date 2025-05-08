@@ -1,13 +1,16 @@
 <resources>
-    <string name="app_name">Mobpro 1</string>
+    <string name="app_name">My Library</string>
     <string name="list_kosong">Belum ada data</string>
     <string name="x_diklik">%1$s diklik!</string>
-    <string name="tambah_catatan">Tambah catatan</string>
+    <string name="tambah_buku">Tambah Buku</string>
     <string name="judul">Judul</string>
-    <string name="isi_catatan">Isi Catatan</string>
+    <string name="isi_buku">Isi Buku</string>
     <string name="kembali">Kembali</string>
     <string name="simpan">Simpan</string>
-    <string name="edit_catatan">Ubah catatan</string>
-    <string name="belum_bisa">Belum bisa</string>
-
+    <string name="edit_buku">Ubah Buku</string>
+    <string name="invalid">Judul dan isbn catatan tidak boleh kosong.</string>
+    <string name="lainnya">Opsi lainnya</string>
+    <string name="hapus">Hapus Buku</string>
+    <string name="nama_buku">Nama Buku</string>
+    <string name="isbn_buku">ISBN</string>
 </resources>

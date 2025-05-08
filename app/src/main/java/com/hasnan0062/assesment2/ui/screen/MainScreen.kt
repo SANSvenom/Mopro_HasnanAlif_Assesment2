@@ -33,10 +33,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hasnan0062.assesment2.R
-import com.hasnan0062.assesment2.model.Catatan
+import com.hasnan0062.assesment2.model.Buku
 import com.hasnan0062.assesment2.navigation.Screen
-import com.hasnan0062.assesment2.ui.theme.Assesment2Theme
 import com.hasnan0062.assesment2.screen.MainViewModel
+import com.hasnan0062.assesment2.ui.theme.Assesment2Theme
 
 
 @Composable
@@ -97,7 +97,7 @@ fun ScreenContent(modifier: Modifier = Modifier, navController: NavHostControlle
         contentPadding = PaddingValues(bottom = 84.dp),
     ){
         items(data){
-            ListItem(catatan = it){
+            ListItem(buku = it){
                 navController.navigate(Screen.FormUbah.withId(it.id))
             }
             HorizontalDivider()
@@ -110,7 +110,7 @@ fun ScreenContent(modifier: Modifier = Modifier, navController: NavHostControlle
 }
 
 @Composable
-fun ListItem(catatan: Catatan, onClick: () -> Unit ){
+fun ListItem(buku: Buku, onClick: () -> Unit ){
     Column(
         modifier = Modifier.fillMaxWidth()
             .clickable {onClick() }
@@ -119,15 +119,16 @@ fun ListItem(catatan: Catatan, onClick: () -> Unit ){
 
 
     ){
-        Text(text = catatan.nama,
+        Text(text = buku.judul,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.Bold
         )
-        Text(text = catatan.nim,
+        Text(text = buku.isbn,
             maxLines = 2,
-            overflow = TextOverflow.Ellipsis)
-        Text(text = catatan.kelas)
+            overflow = TextOverflow.Ellipsis
+        )
+        Text(text = buku.kategori)
     }
 }
 

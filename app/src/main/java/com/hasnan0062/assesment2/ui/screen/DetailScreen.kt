@@ -43,26 +43,26 @@ import com.hasnan0062.assesment2.ui.screen.DetailViewModel
 import com.hasnan0062.assesment2.ui.theme.Assesment2Theme
 
 
-const val KEY_ID_CATATAN = "idCatatan"
+const val KEY_ID_BUKU = "idBuku"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(navController: NavHostController, id: Long? = null) {
     val viewModel: DetailViewModel = viewModel()
 
-    var nama by rememberSaveable { mutableStateOf("") }
-    var nim by rememberSaveable { mutableStateOf("") }
-    var selectedKelas by rememberSaveable { mutableStateOf("D3IF-47-01") }
+    var judul by rememberSaveable { mutableStateOf("") }
+    var isbn by rememberSaveable { mutableStateOf("") }
+    var selectedKategori by rememberSaveable { mutableStateOf("Fiksi") }
 
-    val listKelas = listOf("D3IF-47-01","D3IF-47-02","D3IF-47-03", "D3IF-47-04","D3IF-47-05", "D3IF-47-06")
+    val listKategori = listOf("Fiksi","Nonfiksi","IPTEK", "Pendidikan dan Referensi","Agama dan Spiritualitas", "Hobi dan Gaya Hidup","Self improvement","Seni & Desain")
 
     // Ambil data saat edit
     LaunchedEffect(id) {
         if (id != null) {
-            val data = viewModel.getCatatan(id)
-            nama = data.nama
-            nim = data.nim
-            selectedKelas = data.kelas ?: "D3IF-47-01"
+            val data = viewModel.getBuku(id)
+            judul = data.judul
+            isbn = data.isbn
+            selectedKategori = data.kategori ?: "D3IF-47-01"
         }
     }
 
@@ -113,9 +113,9 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             OutlinedTextField(
-                value = nama,
-                onValueChange = { nama = it },
-                label = { Text(text = "Nama") },
+                value = judul,
+                onValueChange = { judul = it },
+                label = { Text(text = "judul") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.Words,
@@ -125,9 +125,9 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
             )
 
             OutlinedTextField(
-                value = nim,
-                onValueChange = { nim = it },
-                label = { Text(text = "NIM") },
+                value = isbn,
+                onValueChange = { isbn = it },
+                label = { Text(text = "ISBN") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.Characters
@@ -135,17 +135,17 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Text(text = "Pilih Kelas", style = MaterialTheme.typography.titleMedium)
+            Text(text = "Pilih Kategori", style = MaterialTheme.typography.titleMedium)
 
-            listKelas.forEach { kelas ->
+            listKategori.forEach { kategori ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = selectedKelas == kelas,
-                        onClick = { selectedKelas = kelas }
+                        selected = selectedKategori == kategori,
+                        onClick = { selectedKategori = kategori }
                     )
-                    Text(text = kelas)
+                    Text(text = kategori)
                 }
             }
         }

@@ -6,7 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.hasnan0062.assesment2.navigation.SetupNavGraph
-import com.hasnan0062.assesment2.ui.theme.Assesment2Theme
+import com.hasnan0062.assesment2.ui.theme.Theme
 
 
 class MainActivity : ComponentActivity() {
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Assesment2Theme {
+            Theme {
                 SetupNavGraph()
             }
         }

@@ -1,4 +1,4 @@
-package com.hasnan0062.assesment2.ui.theme
+package com.hasnan0062.assesment2.ui.theme.defaults
 
 import androidx.compose.ui.graphics.Color
 

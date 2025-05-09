@@ -53,7 +53,7 @@ import com.hasnan0062.assesment2.database.BukuDb
 import com.hasnan0062.assesment2.model.Buku
 import com.hasnan0062.assesment2.navigation.Screen
 import com.hasnan0062.assesment2.screen.MainViewModel
-import com.hasnan0062.assesment2.ui.theme.Assesment2Theme
+import com.hasnan0062.assesment2.ui.theme.Theme
 import com.hasnan0062.assesment2.util.SettingsDataStore
 import com.hasnan0062.assesment2.util.ViewModelFactory
 import kotlinx.coroutines.CoroutineScope
@@ -66,6 +66,7 @@ import kotlinx.coroutines.launch
 fun MainScreen(navController: NavHostController) {
     val dataStore = SettingsDataStore(LocalContext.current)
     val showList by dataStore.layoutFlow.collectAsState(true)
+    val isTheme by dataStore.themeFlow.collectAsState(true)
 
     Scaffold(
         topBar = {
@@ -99,6 +100,20 @@ fun MainScreen(navController: NavHostController) {
                             contentDescription = stringResource(
                                 if(showList) R.string.grid
                                 else R.string.list
+                            ),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                    IconButton(onClick = {CoroutineScope(Dispatchers.IO).launch {
+                        dataStore.saveTheme(!isTheme)
+                    }
+                    }){
+                        Icon(
+                            painter = painterResource(
+                                R.drawable.baseline_palette_24
+                            ),
+                            contentDescription = stringResource(
+                                R.string.theme
                             ),
                             tint = MaterialTheme.colorScheme.primary
                         )
@@ -231,7 +246,7 @@ fun GridItem(buku: Buku, onClick: () -> Unit ){
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    Assesment2Theme {
+    Theme {
         MainScreen(rememberNavController())
     }
 }

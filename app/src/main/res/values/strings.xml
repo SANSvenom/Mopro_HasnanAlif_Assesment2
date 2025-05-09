@@ -11,6 +11,7 @@
     <string name="invalid">Judul dan isbn catatan tidak boleh kosong.</string>
     <string name="lainnya">Opsi lainnya</string>
     <string name="hapus">Hapus Buku</string>
+    <string name="theme">Mengganti tema aplikasi</string>
     <string name="nama_buku">Nama Buku</string>
     <string name="isbn_buku">ISBN</string>
     <string name="pesan_hapus">Hapus catatan ini?</string>
